@@ -1,16 +1,14 @@
 import User from "../models/User";
 
 interface UserInterface {
-  id: string;
   name: string;
   description: string;
 }
 
 export class CreateUserService {
-  async execute({ id, name, description }: UserInterface) {
+  async execute({ name, description }: UserInterface) {
     // create new user
     const newUser = new User({
-      id,
       name,
       description,
     });

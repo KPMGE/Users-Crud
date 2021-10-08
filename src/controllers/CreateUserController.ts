@@ -3,7 +3,6 @@ import { CreateUserService } from "../services/CreateUserService";
 import { HttpError } from "../models/HttpError";
 
 interface UserInterface {
-  id: string;
   name: string;
   description: string;
 }
@@ -14,12 +13,12 @@ export class CreateUserController {
     const createUserService = new CreateUserService();
 
     // getting information from body request
-    const { id, name, description }: UserInterface = request.body;
+    const { name, description }: UserInterface = request.body;
 
     // tring to save user
-    let newUser;
+    let newUser: unknown;
     try {
-      newUser = await createUserService.execute({ id, name, description });
+      newUser = await createUserService.execute({ name, description });
     } catch (err) {
       const error = new HttpError(err.message, 400);
       return next(error);

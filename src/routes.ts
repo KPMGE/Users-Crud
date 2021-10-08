@@ -1,14 +1,16 @@
 import { Router } from "express";
 import { CreateUserController } from "./controllers/CreateUserController";
+import { GetUserByIdController } from "./controllers/GetUserByIdController";
 
 const createUserController = new CreateUserController();
+const getUserByIdController = new GetUserByIdController();
 
 const route = Router();
 
-route.post("/user", createUserController.handle);
+// create a new user and stores it into the database
+route.post("/new/user", createUserController.handle);
 
-route.get("/test", (req, res) => {
-  res.send("working");
-});
+// get a user by id
+route.get("/users/:userId", getUserByIdController.handle);
 
 export default route;

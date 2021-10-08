@@ -13,29 +13,24 @@ app.use(express.json());
 app.use(route);
 
 // catch wrong routes
-app.use(
-  (
-    error: HttpError,
-    request: Request,
-    response: Response,
-    next: NextFunction
-  ) => {
-    return next(new HttpError("This route does not exists!", 404));
-  }
-);
+app.use((request: Request, response: Response, next: NextFunction) => {
+  return next(new HttpError("This route does not exists!", 404));
+});
 
 // catch errors
 app.use(
   (
-    error: HttpError,
+    err: HttpError,
     request: Request,
     response: Response,
     next: NextFunction
   ) => {
-    if (error instanceof HttpError) {
-      response.status(error.errorCode || 500);
-      response.json({ errorMessage: error.message || "Unknown error" });
+    if (err.message) {
+      response.status(err.errorCode);
+      return response.json({ errorMessage: err.message });
     }
+
+    return response.status(500).json({ errorMessage: "Unknown error" });
   }
 );
 
