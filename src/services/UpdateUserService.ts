@@ -1,11 +1,7 @@
 import User, { UserInterface } from "../models/User";
 
 export class UpdateUserService {
-  async execute(
-    id: string,
-    name: string,
-    description: string
-  ): Promise<UserInterface> {
+  async execute(id: string, description: string): Promise<UserInterface> {
     // find user
     let foundUser: UserInterface | null = null;
 
@@ -20,7 +16,6 @@ export class UpdateUserService {
     }
 
     // update user data
-    foundUser.name = name;
     foundUser.description = description;
 
     // save updated user

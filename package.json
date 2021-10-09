@@ -6,7 +6,8 @@
   "author": "KPMGE <jesuskevin254@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "tsc && nodemon output/server.js"
+    "start": "tsc && node output/server.js",
+    "startDev": "tsc && nodemon output/server.js"
   },
   "dependencies": {
     "dotenv": "^10.0.0",
